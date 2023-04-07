@@ -7,6 +7,16 @@
 
 import UIKit
 
+// MARK: - MainVC (Connection Presenter -> View)
+
+protocol MainVCProtocol: AnyObject {
+    func setupStartSettings()
+    func reloadData()
+    func changeLoadingView(isHidden: Bool)
+    func changeDirectionButtonColor(_ color: UIColor)
+    func scrollToTop()
+}
+
 class MainVC: UIViewController {
     
     // MARK: - IB Outlets
@@ -15,18 +25,9 @@ class MainVC: UIViewController {
     @IBOutlet private weak var sortingDirectionButton: UIBarButtonItem!
     @IBOutlet private weak var loadingView: UIView!
     
-    // MARK: - Private Properties
+    // MARK: - Presenter
     
-    private let server = Server()
-    private var deals: [Deal] = []
-    private var currentSegmentIndex = 0
-    private var dealsReversed = false
-    private var countElementsOnPage = 100
-    private weak var timer: Timer?
-
-    private let semaphore = DispatchSemaphore(value: 1) // Семафор для того, чтобы гарантировать, что данные массива deals будут изменяться только одним потоком одновременно (используя методы wait() и signal(), предотвращая конфликты при одновременном доступе к deals с разных потоков
-    
-    private let globalQueue = DispatchQueue.global(qos: .userInteractive)
+    private var presenter: MainVCPresenterProtocol!
     
     // MARK: - Activity Indicator View
     
@@ -38,119 +39,21 @@ class MainVC: UIViewController {
     }()
     
     deinit {
-        timer?.invalidate()
+        presenter.didDeinit()
     }
     
     // MARK: - ViewController Lifecycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Deals"
-        loadingView.isHidden = true
-        setupTableView()
-        setupTimer()
-        getDataFromServer()
+        presenter = MainVCPresenter(view: self)
+        presenter.viewDidLoad()
     }
     
     // MARK: - IB Actions
     
     @IBAction func sortingDirectionButtonTapped(_ sender: UIBarButtonItem) {
-        reverseData()
-    }
-    
-    // MARK: - Timer
-    
-    private func setupTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(timerFunction), userInfo: nil, repeats: true)
-        timer?.fire()
-    }
-    
-    @objc
-    private func timerFunction() {
-        updateData()
-    }
-    
-    // MARK: - Reverse Data
-
-    private func reverseData() {
-        loadingView.isHidden = false
-        globalQueue.async { [weak self] in
-            guard let self = self else { return }
-            self.semaphore.wait()
-            self.deals = self.deals.reversed()
-            self.dealsReversed.toggle()
-            self.updateData()
-            self.semaphore.signal()
-            
-            DispatchQueue.main.async {
-                self.scrollToTop()
-                self.loadingView.isHidden = true
-                self.sortingDirectionButton.tintColor = self.dealsReversed ? .systemMint : .systemBlue
-            }
-        }
-    }
-    
-    // MARK: - Update Data
-    
-    private func updateData() {
-        globalQueue.async { [weak self] in
-            self?.semaphore.wait() // перед изменением данных запрашиваем разрешение у семафора
-            self?.sortDeals()
-            self?.semaphore.signal() // после изменения данных освобождаем разрешение
-            
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
-                self?.loadingView.isHidden = true
-            }
-        }
-    }
-    
-    // MARK: - Sort Data
-    
-    private func sortDeals() {
-        if dealsReversed {
-            switch currentSegmentIndex {
-            case 0: deals.sort { $0.dateModifier < $1.dateModifier }  // Date
-            case 1: deals.sort { $0.instrumentName > $1.instrumentName } // Name
-            case 2: deals.sort { $0.price > $1.price } // Price
-            case 3: deals.sort { $0.amount > $1.amount } // Amount
-            case 4: deals.sort { $0.side < $1.side } // Side
-            default: break
-            }
-        } else {
-            switch currentSegmentIndex {
-            case 0: deals.sort { $0.dateModifier > $1.dateModifier }  // Date
-            case 1: deals.sort { $0.instrumentName < $1.instrumentName } // Name
-            case 2: deals.sort { $0.price < $1.price } // Price
-            case 3: deals.sort { $0.amount < $1.amount } // Amount
-            case 4: deals.sort { $0.side > $1.side } // Side
-            default: break
-            }
-        }
-    }
-    
-    // MARK: - Scroll To Top
-
-    private func scrollToTop() {
-        if tableView.numberOfRows(inSection: 0) > 0 {
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        }
-    }
-    
-}
-
-// MARK: - Getting Data From Server
-
-extension MainVC {
-    private func getDataFromServer() {
-        server.subscribeToDeals { [weak self] deals in
-            guard let self = self else { return }
-            self.semaphore.wait()
-            self.deals.append(contentsOf: deals)
-            self.semaphore.signal()
-            print("Количество элементов в массиве deals:", self.deals.count)
-            print("Количество элементов в table view:", self.countElementsOnPage)
-        }
+        presenter.directionButtonTapped()
     }
 }
 
@@ -168,31 +71,53 @@ extension MainVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        deals.prefix(countElementsOnPage).count
+        presenter.getNumberOfRowsInSection()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DealCell.reuseIdentifier, for: indexPath) as? DealCell else { return UITableViewCell() }
-        let deal = deals[indexPath.row]
-        cell.configure(deal)
+        cell.configure(presenter.getDealForCell(indexPath.row))
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let cell = tableView.dequeueReusableHeaderFooterView(withIdentifier: HeaderCell.reuseIdentifier) as? HeaderCell else { return UIView() }
         cell.delegate = { [weak self] segmentIndex in
-            self?.loadingView.isHidden = false
-            self?.currentSegmentIndex = segmentIndex
-            self?.updateData()
-            self?.scrollToTop()
+            self?.presenter.segmentControlTapped(segmentIndex)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == countElementsOnPage - 1 {
-            countElementsOnPage += 100
-            tableView.reloadData()
+        presenter.willDisplayCell(indexPath.row)
+    }
+}
+
+// MARK: - Realization MainVCProtocol Methods (Connection Presenter -> View)
+
+extension MainVC: MainVCProtocol {
+    
+    func setupStartSettings() {
+        title = presenter.title
+        loadingView.isHidden = true
+        setupTableView()
+    }
+    
+    func reloadData() {
+        tableView.reloadData()
+    }
+    
+    func changeLoadingView(isHidden: Bool) {
+        loadingView.isHidden = isHidden
+    }
+    
+    func changeDirectionButtonColor(_ color: UIColor) {
+        sortingDirectionButton.tintColor = color
+    }
+    
+    func scrollToTop() {
+        if tableView.numberOfRows(inSection: 0) > 0 {
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
     }
 }

@@ -18,6 +18,7 @@
 		151E706F2941FC75000F9ED0 /* DealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E706E2941FC75000F9ED0 /* DealCell.swift */; };
 		155E2E082942CF470094E5DA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 155E2E062942CF470094E5DA /* HeaderCell.xib */; };
 		155E2E092942CF470094E5DA /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155E2E072942CF470094E5DA /* HeaderCell.swift */; };
+		9C48B67D29DFA12E0053F58E /* MainVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C48B67C29DFA12E0053F58E /* MainVCPresenter.swift */; };
 		9CB1695529DCB74B00561947 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1695429DCB74B00561947 /* Deal.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		151E706E2941FC75000F9ED0 /* DealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealCell.swift; sourceTree = "<group>"; };
 		155E2E062942CF470094E5DA /* HeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderCell.xib; sourceTree = "<group>"; };
 		155E2E072942CF470094E5DA /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		9C48B67C29DFA12E0053F58E /* MainVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCPresenter.swift; sourceTree = "<group>"; };
 		9CB1695429DCB74B00561947 /* Deal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				151E705A2940D970000F9ED0 /* MainVC.swift */,
+				9C48B67C29DFA12E0053F58E /* MainVCPresenter.swift */,
 				9CA5D4D129DCA1350059696A /* Views */,
 			);
 			path = Main;
@@ -220,6 +223,7 @@
 				151E70572940D970000F9ED0 /* AppDelegate.swift in Sources */,
 				151E706B2940D98C000F9ED0 /* Server.swift in Sources */,
 				151E70592940D970000F9ED0 /* SceneDelegate.swift in Sources */,
+				9C48B67D29DFA12E0053F58E /* MainVCPresenter.swift in Sources */,
 				9CB1695529DCB74B00561947 /* Deal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
