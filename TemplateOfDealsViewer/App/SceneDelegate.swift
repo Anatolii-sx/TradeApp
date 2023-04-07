@@ -1,8 +1,8 @@
 //
-//  SceneDelegate.swift
+//  MainVC.swift
 //  TemplateOfDealsViewer
 //
-//  Created by Artem Salimyanov on 07.12.2022.
+//  Created by Анатолий Миронов on 04.04.2023.
 //
 
 import UIKit
@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

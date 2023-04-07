@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		151E70572940D970000F9ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E70562940D970000F9ED0 /* AppDelegate.swift */; };
 		151E70592940D970000F9ED0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E70582940D970000F9ED0 /* SceneDelegate.swift */; };
-		151E705B2940D970000F9ED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E705A2940D970000F9ED0 /* ViewController.swift */; };
+		151E705B2940D970000F9ED0 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E705A2940D970000F9ED0 /* MainVC.swift */; };
 		151E705E2940D970000F9ED0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 151E705C2940D970000F9ED0 /* Main.storyboard */; };
 		151E70602940D971000F9ED0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 151E705F2940D971000F9ED0 /* Assets.xcassets */; };
 		151E70632940D971000F9ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 151E70612940D971000F9ED0 /* LaunchScreen.storyboard */; };
@@ -18,13 +18,14 @@
 		151E706F2941FC75000F9ED0 /* DealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E706E2941FC75000F9ED0 /* DealCell.swift */; };
 		155E2E082942CF470094E5DA /* HeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 155E2E062942CF470094E5DA /* HeaderCell.xib */; };
 		155E2E092942CF470094E5DA /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155E2E072942CF470094E5DA /* HeaderCell.swift */; };
+		9CB1695529DCB74B00561947 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1695429DCB74B00561947 /* Deal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		151E70532940D970000F9ED0 /* TemplateOfDealsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TemplateOfDealsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		151E70562940D970000F9ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		151E70582940D970000F9ED0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		151E705A2940D970000F9ED0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		151E705A2940D970000F9ED0 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		151E705D2940D970000F9ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		151E705F2940D971000F9ED0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		151E70622940D971000F9ED0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,6 +35,7 @@
 		151E706E2941FC75000F9ED0 /* DealCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealCell.swift; sourceTree = "<group>"; };
 		155E2E062942CF470094E5DA /* HeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderCell.xib; sourceTree = "<group>"; };
 		155E2E072942CF470094E5DA /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		9CB1695429DCB74B00561947 /* Deal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,20 +68,77 @@
 		151E70552940D970000F9ED0 /* TemplateOfDealsViewer */ = {
 			isa = PBXGroup;
 			children = (
-				151E70562940D970000F9ED0 /* AppDelegate.swift */,
-				151E70582940D970000F9ED0 /* SceneDelegate.swift */,
-				151E705A2940D970000F9ED0 /* ViewController.swift */,
-				151E705C2940D970000F9ED0 /* Main.storyboard */,
-				151E705F2940D971000F9ED0 /* Assets.xcassets */,
-				151E70612940D971000F9ED0 /* LaunchScreen.storyboard */,
-				151E70642940D971000F9ED0 /* Info.plist */,
-				151E706A2940D98C000F9ED0 /* Server.swift */,
-				151E706C2941F990000F9ED0 /* DealCell.xib */,
-				151E706E2941FC75000F9ED0 /* DealCell.swift */,
-				155E2E072942CF470094E5DA /* HeaderCell.swift */,
-				155E2E062942CF470094E5DA /* HeaderCell.xib */,
+				9CB4880829DC858500CC22F2 /* App */,
+				9CB4880529DC853300CC22F2 /* Main */,
+				9CB1695229DCA1D200561947 /* Storyboards */,
+				9CB4880A29DC85D300CC22F2 /* Services */,
+				9CB1695329DCB72B00561947 /* Models */,
+				9CB4880929DC858C00CC22F2 /* Resources */,
 			);
 			path = TemplateOfDealsViewer;
+			sourceTree = "<group>";
+		};
+		9CA5D4D129DCA1350059696A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				155E2E062942CF470094E5DA /* HeaderCell.xib */,
+				155E2E072942CF470094E5DA /* HeaderCell.swift */,
+				151E706C2941F990000F9ED0 /* DealCell.xib */,
+				151E706E2941FC75000F9ED0 /* DealCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9CB1695229DCA1D200561947 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				151E705C2940D970000F9ED0 /* Main.storyboard */,
+				151E70612940D971000F9ED0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		9CB1695329DCB72B00561947 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1695429DCB74B00561947 /* Deal.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9CB4880529DC853300CC22F2 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				151E705A2940D970000F9ED0 /* MainVC.swift */,
+				9CA5D4D129DCA1350059696A /* Views */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		9CB4880829DC858500CC22F2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				151E70562940D970000F9ED0 /* AppDelegate.swift */,
+				151E70582940D970000F9ED0 /* SceneDelegate.swift */,
+				151E70642940D971000F9ED0 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9CB4880929DC858C00CC22F2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				151E705F2940D971000F9ED0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9CB4880A29DC85D300CC22F2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				151E706A2940D98C000F9ED0 /* Server.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,11 +215,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				151E706F2941FC75000F9ED0 /* DealCell.swift in Sources */,
-				151E705B2940D970000F9ED0 /* ViewController.swift in Sources */,
+				151E705B2940D970000F9ED0 /* MainVC.swift in Sources */,
 				155E2E092942CF470094E5DA /* HeaderCell.swift in Sources */,
 				151E70572940D970000F9ED0 /* AppDelegate.swift in Sources */,
 				151E706B2940D98C000F9ED0 /* Server.swift in Sources */,
 				151E70592940D970000F9ED0 /* SceneDelegate.swift in Sources */,
+				9CB1695529DCB74B00561947 /* Deal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,12 +369,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9K9C6RY6JG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TemplateOfDealsViewer/Info.plist;
+				INFOPLIST_FILE = TemplateOfDealsViewer/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,12 +396,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9K9C6RY6JG;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TemplateOfDealsViewer/Info.plist;
+				INFOPLIST_FILE = TemplateOfDealsViewer/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
